@@ -23,9 +23,9 @@ Blockly.Blocks['attribute'] = {
 	init: function() {
 		this.appendValueInput("NAME")
 		.setCheck(null)
-		.appendField(new Blockly.FieldTextInput("color"), "name")
+		.appendField(new Blockly.FieldTextInput("name"), "name")
 		.appendField(":")
-		.appendField(new Blockly.FieldTextInput("black"), "value");
+		.appendField(new Blockly.FieldTextInput("value"), "value");
 		this.setOutput(true, null);
 		this.setColour(230);
 		this.setTooltip('');
