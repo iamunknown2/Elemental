@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="blockly_compressed.js"></script>
 		<script src="javascript_compressed.js"></script>
 		<script src="blocks.js"></script>
@@ -9,19 +10,22 @@
 	<body>
 		<xml id="toolbox" style="display: none">
 			<category name="text">
-				<block type="h1"></block>
 				<block type="text"></block>
+				<block type="h1"></block>		
+			</category>
+			<category name="general">
+				<block type="attribute"></block>		
 			</category>
 		</xml>
 		<div id="blocklyDiv" style="height: 80vh; width: 80%;"></div>
-		<div id="textarea"></div>
+		<div id="htmlarea"></div>
 	</body>
 	<script>
   	var workspace = Blockly.inject('blocklyDiv',
       {toolbox: document.getElementById('toolbox')});
 	function myUpdateFunction(event) {
 		var code = Blockly.JavaScript.workspaceToCode(workspace);
-		document.getElementById('textarea').innerHTML = code;
+		document.getElementById('htmlarea').innerHTML = code;
 	}
 	workspace.addChangeListener(myUpdateFunction);
 	</script>
