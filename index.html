@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script src="blockly_compressed.js"></script>
+		<script src="javascript_compressed.js"></script>
+		<script src="blocks.js"></script>
+		<script src="en.js"></script>
+	</head>
+	<body>
+		<xml id="toolbox" style="display: none">
+			<category name="text">
+				<block type="h1"></block>
+				<block type="text"></block>
+			</category>
+		</xml>
+		<div id="blocklyDiv" style="height: 80vh; width: 80%;"></div>
+		<div id="textarea"></div>
+	</body>
+	<script>
+  	var workspace = Blockly.inject('blocklyDiv',
+      {toolbox: document.getElementById('toolbox')});
+	function myUpdateFunction(event) {
+		var code = Blockly.JavaScript.workspaceToCode(workspace);
+		document.getElementById('textarea').innerHTML = code;
+	}
+	workspace.addChangeListener(myUpdateFunction);
+	</script>
+</html>
