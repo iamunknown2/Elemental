@@ -1,3 +1,6 @@
+var delimiter1 = "|~|"; // Delimiter is weird to prevent clashes
+var delimiter2 = "<|~" // See above
+
 Blockly.Blocks['text'] = {
 	init: function() {
 		this.appendValueInput("string")
@@ -35,7 +38,7 @@ Blockly.JavaScript['attribute'] = function(block) {
 	var text_value = block.getFieldValue('value');
 	var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
 	// TODO: Assemble JavaScript into code variable.
-	var code = text_name + ':' + text_value + "," + value_name;
+	var code = text_name + delimiter2 + text_value + delimiter1 + value_name;
 	// TODO: Change ORDER_NONE to the correct strength.
 	return [code, Blockly.JavaScript.ORDER_NONE];
 };
@@ -59,10 +62,10 @@ Blockly.JavaScript['h1'] = function(block) {
 	var value_attributes = Blockly.JavaScript.valueToCode(block, 'attributes', Blockly.JavaScript.ORDER_ATOMIC);
 	var statements_children = Blockly.JavaScript.statementToCode(block, 'children');
 	// TODO: Assemble JavaScript into code variable.
-	var attribute_array = value_attributes.split(",");
+	var attribute_array = value_attributes.split(delimiter1);
 	var attrib_string = "";
 	for (var i = 0; i < attribute_array.length - 1; i++) {
-		attrib_string += attribute_array[i].split(":")[0].slice(1) + "='" + attribute_array[i].split(":")[1] + "' ";
+		attrib_string += attribute_array[i].split(delimiter2)[0].slice(1) + "='" + attribute_array[i].split(delimiter2)[1] + "' ";
 	}
 	var code = '<h1 ' + attrib_string + '>' + statements_children + '</h1>';
 	return code;
