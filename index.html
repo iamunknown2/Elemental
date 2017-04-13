@@ -6,26 +6,74 @@
 		<script src="javascript_compressed.js"></script>
 		<script src="blocks.js"></script>
 		<script src="en.js"></script>
+		<style>
+		body {
+			display: flex;
+		}
+		#blocklyDiv {
+			height: 80vh;
+			width: 50%;
+			margin-right: 5px;
+		}
+		#htmlarea {
+			height: 80vh;
+			width: 50%;
+			margin-left: 5px;
+		}
+		</style>
 	</head>
 	<body>
 		<xml id="toolbox" style="display: none">
 			<category name="text">
 				<block type="text"></block>
-				<block type="h1"></block>		
+				<block type="h1"></block>
+				<block type="h2"></block>
+				<block type="h3"></block>
+				<block type="p"></block>
+				<block type="span"></block>
+				<block type="pre"></block>
+				<block type="code"></block>
+				<block type="a"></block>
+				<block type="abbr"></block>
+				<block type="b"></block>
+				<block type="i"></block>
+				<block type="strong"></block>
+				<block type="em"></block>
+				<block type="mark"></block>
+				<block type="del"></block>
+				<block type="ins"></block>
+				<block type="sub"></block>
+				<block type="sup"></block>
+				<block type="kbd"></block>
+				<block type="samp"></block>
+				<block type="var"></block>
+				<block type="ol"></block>
+				<block type="ul"></block>
+				<block type="li"></block>
+			</category>
+			<category name="forms">
+				<block type="form"></block>
+				<block type="input"></block>
+			</category>
+			<category name="CSS">
+				<block type="style"></block>
+				<block type="selector"></block>
+				<block type="style_attribute"></block>
 			</category>
 			<category name="general">
-				<block type="attribute"></block>		
+				<block type="attribute"></block>
 			</category>
 		</xml>
-		<div id="blocklyDiv" style="height: 80vh; width: 80%;"></div>
-		<div id="htmlarea"></div>
+		<div id="blocklyDiv" style=""></div>
+		<iframe id="htmlarea" style=""><html><body></body></html></iframe>
+		<br>
 	</body>
 	<script>
   	var workspace = Blockly.inject('blocklyDiv',
       {toolbox: document.getElementById('toolbox')});
 	function myUpdateFunction(event) {
 		var code = Blockly.JavaScript.workspaceToCode(workspace);
-		document.getElementById('htmlarea').innerHTML = code;
+		$('#htmlarea').contents().find('body').html(code);
 	}
 	workspace.addChangeListener(myUpdateFunction);
 	</script>
