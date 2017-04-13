@@ -8,7 +8,13 @@ my $flag;
 if (scalar(@ARGV) == 2) {
 	$flag = $ARGV[1];
 }
-my $closingtag = $flag eq '--noclosingtag' ? "" : " + '</$tag>'";
+my $flagraised = $flag eq '--noclosingtag';
+my $statementinput = $flagraised ? "" :
+"
+this.appendStatementInput('children')
+    .setCheck(null);
+";
+my $closingtag = $flagraised ? "" : " + statements_children + '</$tag>'";
 my $code =
 "
 Blockly.Blocks['$tag'] = {
@@ -16,8 +22,7 @@ Blockly.Blocks['$tag'] = {
 		this.appendValueInput('attributes')
 			.setCheck(null)
 			.appendField('$tag');
-		this.appendStatementInput('children')
-			.setCheck(null);
+		$statementinput
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(0);
@@ -35,7 +40,7 @@ Blockly.JavaScript['$tag'] = function(block) {
 	for (var i = 0; i < attribute_array.length - 1; i++) {
 		attrib_string += attribute_array[i].split(delimiter2)[0].slice(1) + '=\"' + attribute_array[i].split(delimiter2)[1] + '\" ';
 	}
-	var code = '<$tag ' + attrib_string + '>' + statements_children" . $closingtag . ";
+	var code = '<$tag ' + attrib_string + '>'" . $closingtag . ";
 	return code;
 };
 ";

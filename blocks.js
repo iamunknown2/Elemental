@@ -108,7 +108,7 @@ Blockly.Blocks['style_attribute'] = {
 	this.setPreviousStatement(true, null);
 	this.setNextStatement(true, null);
 	this.setColour(210);
-	this.setTooltip('');
+	this.setTooltip('Attach a name:value block to the right of this block');
 	this.setHelpUrl('');
 	}
 };
@@ -821,8 +821,6 @@ Blockly.Blocks['input'] = {
 		this.appendValueInput('attributes')
 			.setCheck(null)
 			.appendField('input');
-		this.appendStatementInput('children')
-			.setCheck(null);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(90);
@@ -833,14 +831,12 @@ Blockly.Blocks['input'] = {
 
 Blockly.JavaScript['input'] = function(block) {
 	var value_attributes = Blockly.JavaScript.valueToCode(block, 'attributes', Blockly.JavaScript.ORDER_ATOMIC);
-	var statements_children = Blockly.JavaScript.statementToCode(block, 'children');
-
 	var attribute_array = value_attributes.split(delimiter1);
 	var attrib_string = '';
 	for (var i = 0; i < attribute_array.length - 1; i++) {
 		attrib_string += attribute_array[i].split(delimiter2)[0].slice(1) + '="' + attribute_array[i].split(delimiter2)[1] + '" ';
 	}
-	var code = '<input ' + attrib_string + '>' + statements_children;
+	var code = '<input ' + attrib_string + '>';
 	return code;
 };
 
